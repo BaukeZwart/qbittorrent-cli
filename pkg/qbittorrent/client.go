@@ -135,9 +135,8 @@ func (c *Client) postCtx(ctx context.Context, endpoint string, values url.Values
 	resp, err := c.http.Do(req)
 	if err != nil {
 		return nil, errors.Wrap(err, "could not make request")
+		defer resp.Body.Close()
 	}
-
-	defer resp.Body.Close()
 
 	return resp, nil
 }
